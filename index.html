@@ -7,6 +7,7 @@
     <title>Document</title>
     <link href="styles.css" rel="stylesheet">
     <script src="script.js"></script>
+    <script src="templates.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,9 +16,10 @@
 
 </head>
 
-<body onload="init()">
+<body onclick="closeDialog()" onload="init()">
     <header>
-        <h1 class="header-title">Pokédex</h1>
+        <img src="./img/Pokemon-Symbol-logo.png" class="header-logo">
+        <img class="pkm-Logo" src="./img/Pokemon-Logo.png">
         <div class="header-input">
             <img class="lupe" src="./img/Lupe.png">
             <input class="search-pokemon-inputfield" type="text">
@@ -26,8 +28,7 @@
     <main>
         <div class="pkm" id="pokemon-container">
         </div>
-        <div id="dialog" class="dialog-window"></div>
-        <button onclick="closeOverlay()">schliessen</button>
+        <div onclick="bubblingPrevention(event)" id="dialog" class="dialog-window hidden"></div>
     </main>
 </body>
 </html>

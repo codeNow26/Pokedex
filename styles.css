@@ -22,6 +22,35 @@ header {
     justify-content: space-between;
 }
 
+.pkm-Logo {
+    width: 250px;
+}
+
+.header-logo {
+    width: 80px;
+    padding-left: 30px;
+    transition: transform 0.6s ease-in-out;
+     transform-origin: 70px 40px;
+}
+
+.header-logo:hover {
+    transform: rotate(360deg);
+    cursor: pointer;
+    animation: rotateInf 1s linear infinite;
+}
+
+@keyframes rotateInf {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
 .header-input {
     padding-right: 50px;
     display: flex;
@@ -34,13 +63,6 @@ header {
     border: 1px solid #ffffff;
 }
 
-.header-title {
-    padding-left: 20px;
-    color: yellow;
-    border-color: blue;
-    border: 4px;
-    text-shadow: -1px -1px 0 #0e0c7e, 1px -1px 0 #0e0c7e, -1px 1px 0 #0e0c7e, 1px 1px 0 #0e0c7e;
-}
 
 .pkm {
     padding-top: 70px;
@@ -90,6 +112,7 @@ header {
 }
 
 .pkm-name {
+    color: white;
     text-align: center;
     font-weight: 700;
 }
@@ -105,17 +128,21 @@ header {
     border-radius: 8px;
 }
 
-.big-type{
-      width: 120px;
+.big-type {
+    width: 120px;
 }
 
 .green {
     background-color: green;
 }
 
+.dark-green {
+    background-color: rgb(32, 75, 32);
+}
+
 .purple {
     background-color: purple;
-  
+
 }
 
 .blue {
@@ -123,12 +150,9 @@ header {
 }
 
 .white {
-    background-color: white;
+    background-color: rgb(121, 185, 238);
 }
 
-.light-blue {
-    background-color: lightblue;
-}
 
 .red {
     background-color: red;
@@ -170,17 +194,20 @@ header {
 }
 
 .arrow-wrapper {
-    position: absolute;
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 300px;
+    z-index: 5;
 }
 
 .arrow {
     width: 150px;
     transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
     filter: drop-shadow(0 0 5px #a44cff);
+    pointer-events: auto;
 }
 
 .arrow:hover {
@@ -191,9 +218,9 @@ header {
 
 .pokeball {
     position: absolute;
-    width: 200px;
-    top: 40px;
-    right: 50px;
+    width: 100px;
+    top: 120px;
+    right: 100px;
     margin: auto;
     z-index: 0;
 }
@@ -210,6 +237,7 @@ header {
     height: 100px;
     top: 0;
     font-weight: 700;
+    right: 100px;
 }
 
 .big-types-wrapper {
@@ -219,4 +247,44 @@ header {
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.stats-wrapper {
+    height: 180px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 20px;
+    padding-left: 5px;
+}
+
+.progress-container {
+    margin-top: 15px;
+    display: flex;
+    width: 100%;
+    height: 25px;
+    max-width: 250px;
+    border-radius: 10px;
+    padding: 10px;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.progress-bar {
+    height: 14px;
+    font-size: 10px;
+    background-color: #3074f1;
+    width: 0%;
+    color: white;
+    text-align: center;
+    line-height: 15px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.stat-name {
+    display: flex;
+    justify-content: space-around;
+    font-size: 12px;
 }
