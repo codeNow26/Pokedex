@@ -1,11 +1,12 @@
 async function init() {
-    createCard();
-    await getPokemon();
+    createCard(1, 25);
+    await getPokemon(1, currentPokemon);
 }
 
 
 let allPokemon = {};
 let pkmStats = {};
+let currentPokemon = 25;
 
 const Base_URL = "https://pokeapi.co/api/v2/pokemon/";
 
@@ -16,6 +17,17 @@ let typeColor = {
     bug: "dark-green",
     flying: "white",
     fire: "red",
+    normal: "indianred",
+    electric: "yellow",
+    ground: "brown",
+    fairy: "pink",
+    fighting: "orange",
+    psychic: "magenta",
+    ice: "light-blue",
+    rock: "light-brown",
+    steel: "light-green",
+    dragon: "gold",
+    dark: "darkgray"
 }
 
 async function fetchPokemon(i) {
@@ -26,24 +38,19 @@ async function fetchPokemon(i) {
         pkmtypes.push(data.types[t].type.name);
     }
     let name = data.name;
-    let img = data.sprites.front_default
+    let img = data.sprites.other.dream_world.front_default
 
     return {
         name,
         pkmtypes,
         img
     };
+
 }
 
 async function fetchPokemonStats(i) {
     let response = await fetch(Base_URL + i);
     let data = await response.json();
-    let pkmStats = [];
-    for (let t = 0; t < data.stats.length; t++) {
-        pkmStats.push(data.stats[t].stat.name);
-        pkmStats.push(data.stats[t].base_stat);
-    }
-
     return data.stats;
 }
 
@@ -56,11 +63,13 @@ function openDialogWindow(i, event) {
     let pkmStatsData = pkmStats[i];
     showPokemonOverlay(i, pkmData, pkmStatsData);
     document.getElementById('dialog').style.display = "block";
+    document.body.style.overflow = "hidden";
 }
 
 function pokemonTypeColor(i, pkmData) {
     let addColor = document.getElementById(`pkm-type-${i}`);
     let addColor2 = document.getElementById(`pkm-type2-${i}`);
+    let addColorToBackground = document.getElementById(`card-${i}`);
     let firstType = pkmData.pkmtypes[0];
     let secondaryType = pkmData.pkmtypes[1];
     if (typeColor[firstType]) {
@@ -69,22 +78,27 @@ function pokemonTypeColor(i, pkmData) {
     if (typeColor[secondaryType]) {
         addColor2.classList.add(typeColor[secondaryType]);
     }
+     if (typeColor[firstType]) {
+        addColorToBackground.classList.add(typeColor[firstType]);
+    }
 }
 
-async function getPokemon() {
-    for (let i = 1; i < 16; i++) {
+async function getPokemon(start, end) {
+    for (let i = start; i <= end; i++) {
         let pkmData = await fetchPokemon(i);
         let pkmStatsData = await fetchPokemonStats(i);
         pkmStats[i] = pkmStatsData;
         allPokemon[i] = pkmData;
         showPokemon(i, pkmData);
-
     }
 }
 
 function nextPokemon() {
+    let card = document.querySelectorAll('.card');
     currentIndex++;
-    if (currentIndex > 15) currentIndex = 1;
+    if (currentIndex >= card.length) currentIndex = 1;
+    console.log(currentIndex);
+
 
     let pkmStatsData = pkmStats[currentIndex]
     let pkmData = allPokemon[currentIndex];
@@ -92,8 +106,10 @@ function nextPokemon() {
 }
 
 function previousPokemon() {
+    let card = document.querySelectorAll('.card');
     currentIndex--;
-    if (currentIndex === 0) currentIndex = 15;
+    if (currentIndex === 0) currentIndex = card.length - 1;
+    console.log(currentIndex);
 
     let pkmStatsData = pkmStats[currentIndex]
     let pkmData = allPokemon[currentIndex];
@@ -108,6 +124,7 @@ function bubblingPrevention(event) {
 function closeDialog() {
     let hidden = document.getElementById('dialog');
     hidden.style.display = "none"
+    document.body.style.overflow = "scroll";
 }
 
 function statsBar(i, pkmStatsData) {
@@ -118,7 +135,7 @@ function statsBar(i, pkmStatsData) {
     let bar5 = document.getElementById(`speedBar-${i}`);
 
     bar1.style.width = pkmStatsData[1].base_stat + "%";
-    bar1.textContent =  + pkmStatsData[1].base_stat;
+    bar1.textContent = + pkmStatsData[1].base_stat;
 
     bar2.style.width = pkmStatsData[2].base_stat + "%";
     bar2.textContent = pkmStatsData[2].base_stat;
@@ -132,3 +149,56 @@ function statsBar(i, pkmStatsData) {
     bar5.style.width = pkmStatsData[5].base_stat + "%";
     bar5.textContent = pkmStatsData[5].base_stat;
 }
+
+async function loadNewPokemon() {
+    let start = currentPokemon + 1;
+    let end = currentPokemon + 20;
+    currentPokemon = end + 1;
+
+    showLoading();
+    createCard(start, end);
+    await getPokemon(start, end);
+    hideLoading();
+}
+
+function showLoading() {
+    document.getElementById('loading-overlay').classList.remove('hidden');
+}
+
+function hideLoading() {
+    document.getElementById('loading-overlay').classList.add('hidden');
+}
+
+async function showWaterType(i, pkmData) {
+    test = document.getElementById("pep")
+
+    firstType = pkmData.pkmtypes[0];
+    let secondType = pkmData.pkmtypes[1];
+    console.log("Typ 1:", firstType);
+    console.log("Typ 2:", secondType);
+
+    if (firstType === "electric") {
+        test.innerHTML = `hat geklappt`
+    }
+}
+
+
+function searchPokemon() {
+  let input = document.getElementById("search-bar").value.trim().toLowerCase();
+  let found = false;
+
+  
+  for (let i in allPokemon) {
+    if (allPokemon[i] && allPokemon[i].name.includes(input)) {
+      showPokemon(i, allPokemon[i]); 
+      found = true;
+       alert("Pokémon gefunden");
+      break;
+    }
+  }
+
+  if (!found) {
+    alert("Kein Pokémon gefunden");
+  }
+}
+

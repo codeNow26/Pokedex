@@ -1,21 +1,27 @@
 body {
-    background-color: rgba(15, 10, 10, 0.87);
+    background-image: URL(./img/https___hypebeast.com_image_2020_04_pokemon-pikachu-video-chat-backgrounds-download-info-003.avif);
+    background-repeat: no-repeat;
+    background-size: cover;
     color: rgb(255, 255, 255);
     margin: 0;
     font-family: "Azeret Mono", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
 }
 
 * {
     margin: 0;
+    scroll-behavior: smooth;
 }
 
 main {
-    object-fit: cover;
-    height: 100vh;
+    flex: 1;
 }
 
 header {
-    background-color: rgb(7, 23, 43);
+    background-color: rgb(120, 120, 228);
     height: 100px;
     display: flex;
     align-items: center;
@@ -30,7 +36,7 @@ header {
     width: 80px;
     padding-left: 30px;
     transition: transform 0.6s ease-in-out;
-     transform-origin: 70px 40px;
+    transform-origin: 70px 40px;
 }
 
 .header-logo:hover {
@@ -51,18 +57,6 @@ header {
 
 
 
-.header-input {
-    padding-right: 50px;
-    display: flex;
-}
-
-.search-pokemon-inputfield {
-    padding: 0px;
-    border-radius: 8px;
-    text-decoration: none;
-    border: 1px solid #ffffff;
-}
-
 
 .pkm {
     padding-top: 70px;
@@ -73,8 +67,51 @@ header {
     align-items: center;
 }
 
+.pkm-img-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.types-wrapper {
+    color: white;
+    position: absolute;
+    bottom: 5px;
+    left: 8px;
+    right: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    text-shadow:
+        -1px -1px 0 black,
+        1px -1px 0 black,
+        -1px 1px 0 black,
+        1px 1px 0 black;
+
+}
+
+.type {
+    text-align: center;
+    width: 85px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 4px 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
 .pkm img {
-    width: 200px;
+    width: 150px;
+    max-height: 150px;
+}
+
+.pkm-id {
+    color: aquamarine;
+    padding-left: 4px;
+}
+
+.pkm-card-wrapper {
+    position: relative;
+    height: 250px;
 }
 
 
@@ -86,7 +123,6 @@ header {
     border-radius: 10px;
     margin: 14px;
     background: white;
-    background-image: url(./img/2151954505.jpg);
     object-fit: cover;
     transition: all .3s;
     transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
@@ -99,6 +135,7 @@ header {
     height: 400px;
     background-position: center;
     background-size: 220%;
+    background-image: URL(./img/2151954505.jpg);
 }
 
 .card:hover {
@@ -107,8 +144,27 @@ header {
     filter: drop-shadow(0 0 15px #c26fff) brightness(1.2) saturate(1.3);
 }
 
+.header-input {
+    padding-right: 50px;
+    display: flex;
+    gap: 10px;
+}
+
+.search-pokemon-inputfield {
+    padding: 0px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid #ffffff;
+}
+
 .lupe {
     width: 30px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.lupe:hover {
+    transform: scale(1.33);
 }
 
 .pkm-name {
@@ -117,16 +173,6 @@ header {
     font-weight: 700;
 }
 
-.types-wrapper {
-    display: flex;
-    justify-content: space-around;
-}
-
-.type {
-    text-align: center;
-    width: 80px;
-    border-radius: 8px;
-}
 
 .big-type {
     width: 120px;
@@ -158,9 +204,53 @@ header {
     background-color: red;
 }
 
+.indianred {
+    background-color: indianred;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.brown {
+    background-color: peru;
+}
+
+.pink {
+    background-color: deeppink;
+}
+
+.orange {
+    background-color: coral;
+}
+
+.magenta {
+    background-color: rgb(190, 10, 190);
+}
+
+.light-blue {
+    background-color: aqua;
+}
+
+.light-brown {
+    background-color: chocolate;
+}
+
+.light-green {
+    background-color: aquamarine;
+}
+
+.gold {
+    background-color: darkgoldenrod;
+}
+
+.darkgray {
+    background-color: darkgray;
+}
+
 .dialog-window {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -287,4 +377,111 @@ header {
     display: flex;
     justify-content: space-around;
     font-size: 12px;
+}
+
+.load-pkm-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.load-pmn-btn {
+    padding: 12px 24px;
+    background: rgba(59, 144, 194, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.0);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px auto;
+    display: block;
+}
+
+.load-pmn-btn:hover {
+    background: rgba(6, 135, 221, 0.25);
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#loading-overlay.hidden {
+    display: none;
+}
+
+.loading {
+    width: 60px;
+    height: 60px;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #ff3d3d;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;
+    background-color: rgb(120, 120, 228);
+}
+
+
+.arrow-up {
+    width: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.arrow-up:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+}
+
+.slide-to-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+    cursor: auto
+}
+
+.catch {
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    top: 70px;
+    right: 48%;
+
+}
+
+.pup {
+    height: 100px;
+    background-color: #a44cff;
 }

@@ -1,6 +1,6 @@
-function createCard() {
+function createCard(start, end) {
     let pokemon = document.getElementById('pokemon-container');
-    for (let i = 1; i < 16; i++) {
+    for (let i = start; i <= end; i++) {
         pokemon.innerHTML += `
         <div onclick="openDialogWindow(${i}, event)" class="card" id="card-${i}">
         </div>`
@@ -8,19 +8,27 @@ function createCard() {
 }
 
 function showPokemon(i, pkmData) {
-    let pkmCard = document.getElementById(`card-${i}`)
+    let pkmCard = document.getElementById(`card-${i}`);
     let secondType = "";
+
 
     if (pkmData.pkmtypes[1]) {
         secondType = `<div id="pkm-type2-${i}" class="type">${pkmData.pkmtypes[1]}</div>`
     };
 
     pkmCard.innerHTML = `
-   <div class="pkm-name">${pkmData.name}</div>
-   <img src="${pkmData.img}">
+
+    <div class="pkm-card-wrapper">
+       <div class="pkm-id">#${i}</div>
+   <div class="pkm-name">${pkmData.name.toUpperCase()}</div>
+   <div class= "pkm-img-wrapper">
+   <img class="pkm-img" src="${pkmData.img}">
+   </div>
      <div class="types-wrapper">
     <div id="pkm-type-${i}" class="type">${pkmData.pkmtypes[0]}</div>
-    ${secondType}`
+    ${secondType}
+        </div>
+    </div>`
     pokemonTypeColor(i, pkmData);
 }
 
@@ -75,7 +83,6 @@ function showPokemonOverlay(i, pkmData, pkmStatsData) {
     statsBar(i, pkmStatsData);
             showArrows();
 }
-
 
 function showArrows() {
     let arrows = document.getElementById('dialog');

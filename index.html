@@ -18,17 +18,40 @@
 
 <body onclick="closeDialog()" onload="init()">
     <header>
-        <img src="./img/Pokemon-Symbol-logo.png" class="header-logo">
+        <img id="head" onclick="location.reload()" src="./img/Pokemon-Symbol-logo.png" class="header-logo">
         <img class="pkm-Logo" src="./img/Pokemon-Logo.png">
+             <img class="catch" src="./img/catch.png">
         <div class="header-input">
-            <img class="lupe" src="./img/Lupe.png">
-            <input class="search-pokemon-inputfield" type="text">
+            <img onclick="searchPokemon()" class="lupe" src="./img/Lupe.png">
+            <input type ="text" placeholder="Suche..." id="search-bar"  class="search-pokemon-inputfield">
+
         </div>
     </header>
     <main>
+       
+       <div id="pokemonContainer"></div>
+
         <div class="pkm" id="pokemon-container">
         </div>
         <div onclick="bubblingPrevention(event)" id="dialog" class="dialog-window hidden"></div>
+        <div class="load-pkm-container" id="load-new-pokemon-container">
+            <button onclick="loadNewPokemon()" id="load-new-pokemon" class="load-pmn-btn">Lade mehr</button>
+        </div>
+        <div id="loading-overlay" class="hidden">
+            <div class="loading"></div>
+        </div>
     </main>
+    <footer>
+        <div class="left-footer">
+            <a class="slide-to-top" href="#head">zum Anfang
+                <img class="arrow-up" src="./img/Pokemon arrow up.png">
+            </a>
+        </div>
+        <div class="right-footer">
+            <p>Daten stammen von <a href="https://pokeapi.co/" target="_blank" rel="noopener noreferrer">PokeAPI.co</a>
+            </p>
+        </div>
+    </footer>
 </body>
+
 </html>
