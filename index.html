@@ -20,11 +20,9 @@
     <header>
         <img id="head" onclick="location.reload()" src="./img/Pokemon-Symbol-logo.png" class="header-logo">
         <img class="pkm-Logo" src="./img/Pokemon-Logo.png">
-             <img class="catch" src="./img/catch.png">
         <div class="header-input">
             <img onclick="searchPokemon()" class="lupe" src="./img/Lupe.png">
-            <input type ="text" placeholder="Suche..." id="search-bar"  class="search-pokemon-inputfield">
-
+            <input onkeyup="searchPokemon()" type ="search" placeholder="Suche..." id="search-bar"  class="search-pokemon-inputfield">
         </div>
     </header>
     <main>

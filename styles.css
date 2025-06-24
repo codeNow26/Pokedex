@@ -29,8 +29,11 @@ header {
 }
 
 .pkm-Logo {
+
+    padding-left: 150px;
     width: 250px;
 }
+
 
 .header-logo {
     width: 80px;
@@ -56,10 +59,10 @@ header {
 }
 
 
-
-
 .pkm {
     padding-top: 70px;
+    padding-left: 20px;
+    padding-right: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -87,7 +90,6 @@ header {
         1px -1px 0 black,
         -1px 1px 0 black,
         1px 1px 0 black;
-
 }
 
 .type {
@@ -171,6 +173,11 @@ header {
     color: white;
     text-align: center;
     font-weight: 700;
+    text-shadow:
+        -1px -1px 0 black,
+        1px -1px 0 black,
+        -1px 1px 0 black,
+        1px 1px 0 black;
 }
 
 
@@ -323,15 +330,14 @@ header {
 }
 
 .big-pkm-name {
-    position: absolute;
-    height: 100px;
+    text-align: center;
+    height: 80px;
     top: 0;
     font-weight: 700;
-    right: 100px;
+
 }
 
 .big-types-wrapper {
-    height: 200px;
     padding-left: 10px;
     gap: 10px;
     display: flex;
@@ -354,7 +360,7 @@ header {
     display: flex;
     width: 100%;
     height: 25px;
-    max-width: 250px;
+    max-width: 140px;
     border-radius: 10px;
     padding: 10px;
     flex-direction: column;
@@ -472,16 +478,197 @@ footer {
     cursor: auto
 }
 
-.catch {
-    position: absolute;
-    width: 200px;
-    height: 50px;
-    top: 70px;
-    right: 48%;
+@media (max-width: 1100px) {
+    .pkm-Logo {
+        width: 200px;
+        padding-left: 100px;
+    }
+}
+
+@media (max-width: 900px) {
+    .header-input {
+        padding-right: 30px;
+        gap: 10px;
+    }
+
+    .bigCard {
+        width: 260px;
+        height: 360px;
+        background-size: 220%;
+    }
+
+    .head-pkm-card {
+        height: 150px;
+    }
+
+    .bigPkmImage {
+        width: 100px;
+        height: 150px;
+        right: -14px;
+        bottom: 170px;
+    }
+
+    .big-pkm-name {
+        height: 60px;
+        top: 0;
+        font-weight: 700;
+    }
+
+    .dialog-window {
+        font-size: 16px;
+    }
+
+    .progress-container {
+        height: 15px;
+        max-width: 140px;
+        border-radius: 10px;
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .progress-bar {
+        height: 14px;
+        font-size: 8px;
+        line-height: 16px;
+        max-width: 80px;
+
+    }
+
+    .pokeball {
+        width: 88px;
+        top: 81px;
+        right: 84px;
+    }
+
+    .big-type {
+        width: 80px;
+        font-size: 12px;
+    }
+
+    .arrow {
+        width: 140px;
+    }
+
+    .arrow-wrapper {
+        gap: 20px;
+        margin-top: 250px;
+    }
 
 }
 
-.pup {
-    height: 100px;
-    background-color: #a44cff;
+@media (max-width: 680px) {
+    .pkm-Logo {
+        width: 150px;
+        padding-left: 100px;
+    }
+}
+
+@media (max-width: 600px) {
+    .slide-to-top {
+        font-size: 12px;
+        flex-direction: column;
+    }
+
+    .right-footer {
+        font-size: 12px;
+        max-width: 100px;
+    }
+
+    .pkm-Logo {
+        display: none;
+    }
+
+    .header-logo {
+        width: 80px;
+        padding-left: 20px;
+
+    }
+
+    .search-pokemon-inputfield {
+        padding: 4px 10px;
+        font-size: 12px;
+        height: 30px;
+        width: 150px;
+        box-sizing: border-box;
+    }
+
+    .header-input {
+        padding-right: 10px;
+        gap: 10px;
+    }
+
+    .lupe {
+        width: 30px;
+    }
+}
+
+@media (max-width: 500px) {
+    .bigCard {
+        width: 200px;
+        height: 280px;
+    }
+
+    .head-pkm-card {
+        height: 130px;
+    }
+
+    .bigPkmImage {
+        width: 80px;
+        height: 150px;
+        right: -10px;
+        bottom: 90px;
+    }
+
+    .big-pkm-name {
+        height: 40px;
+        top: 0;
+        font-weight: 700;
+    }
+
+    .dialog-window {
+        height: 70vh;
+        width: 90vw;
+    }
+
+    .progress-container {
+        height: 15px;
+        max-width: 140px;
+        border-radius: 10px;
+        padding: 4px;
+        gap: 2px;
+    }
+
+    .progress-bar {
+        height: 8px;
+        font-size: 8px;
+        background-color: #3074f1;
+        width: 0%;
+        color: white;
+        text-align: center;
+        line-height: 10px;
+        max-width: 80px;
+
+    }
+
+    .pokeball {
+        width: 70px;
+        top: 75px;
+        right: 65px;
+    }
+
+    .big-type {
+        width: 80px;
+        font-size: 12px;
+    }
+
+    .arrow {
+        width: 100px;
+    }
+
+    .arrow-wrapper {
+        gap: 20px;
+        margin-top: 180px;
+    }
+
+
 }

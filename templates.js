@@ -17,7 +17,6 @@ function showPokemon(i, pkmData) {
     };
 
     pkmCard.innerHTML = `
-
     <div class="pkm-card-wrapper">
        <div class="pkm-id">#${i}</div>
    <div class="pkm-name">${pkmData.name.toUpperCase()}</div>
@@ -29,6 +28,7 @@ function showPokemon(i, pkmData) {
     ${secondType}
         </div>
     </div>`
+
     pokemonTypeColor(i, pkmData);
 }
 

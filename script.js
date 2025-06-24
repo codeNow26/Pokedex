@@ -1,9 +1,11 @@
 async function init() {
     createCard(1, 25);
     await getPokemon(1, currentPokemon);
+    console.log();
+
 }
 
-
+let currentNames = [];
 let allPokemon = {};
 let pkmStats = {};
 let currentPokemon = 25;
@@ -54,8 +56,6 @@ async function fetchPokemonStats(i) {
     return data.stats;
 }
 
-
-
 function openDialogWindow(i, event) {
     bubblingPrevention(event);
     currentIndex = i;
@@ -78,7 +78,7 @@ function pokemonTypeColor(i, pkmData) {
     if (typeColor[secondaryType]) {
         addColor2.classList.add(typeColor[secondaryType]);
     }
-     if (typeColor[firstType]) {
+    if (typeColor[firstType]) {
         addColorToBackground.classList.add(typeColor[firstType]);
     }
 }
@@ -97,8 +97,8 @@ function nextPokemon() {
     let card = document.querySelectorAll('.card');
     currentIndex++;
     if (currentIndex >= card.length) currentIndex = 1;
+    console.log(card.length);
     console.log(currentIndex);
-
 
     let pkmStatsData = pkmStats[currentIndex]
     let pkmData = allPokemon[currentIndex];
@@ -153,7 +153,7 @@ function statsBar(i, pkmStatsData) {
 async function loadNewPokemon() {
     let start = currentPokemon + 1;
     let end = currentPokemon + 20;
-    currentPokemon = end + 1;
+    currentPokemon = end;
 
     showLoading();
     createCard(start, end);
@@ -182,23 +182,32 @@ async function showWaterType(i, pkmData) {
     }
 }
 
+let lastInputLength = 0;
 
 function searchPokemon() {
-  let input = document.getElementById("search-bar").value.trim().toLowerCase();
-  let found = false;
-
-  
-  for (let i in allPokemon) {
-    if (allPokemon[i] && allPokemon[i].name.includes(input)) {
-      showPokemon(i, allPokemon[i]); 
-      found = true;
-       alert("Pokémon gefunden");
-      break;
+    let input = document.getElementById("search-bar").value.trim().toLowerCase();
+    let pokemon = document.getElementById('pokemon-container');
+    if (input.length < 3) {
+        if (lastInputLength >= 3) {
+            pokemon.innerHTML = "";
+            createCard(1, 25);
+            getPokemon(1, currentPokemon);
+        }
+        lastInputLength = input.length;
+        return;
     }
-  }
 
-  if (!found) {
-    alert("Kein Pokémon gefunden");
-  }
+    lastInputLength = input.length;
+
+    pokemon.innerHTML = "";
+
+    for (let i in allPokemon) {
+        let pkm = allPokemon[i];
+        if (pkm && input.length > 2 && pkm.name.toLowerCase().includes(input)) {
+            pokemon.innerHTML += `
+        <div onclick="openDialogWindow(${i}, event)" class="card" id="card-${i}">
+        </div>`
+            showPokemon(i, pkm);
+        }
+    }
 }
-
