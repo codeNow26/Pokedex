@@ -1,22 +1,21 @@
 function createCard(start, end) {
-    let pokemon = document.getElementById('pokemon-container');
-    for (let i = start; i <= end; i++) {
-        pokemon.innerHTML += `
+  let pokemon = document.getElementById('pokemon-container');
+  for (let i = start; i <= end; i++) {
+    pokemon.innerHTML += `
         <div onclick="openDialogWindow(${i}, event)" class="card" id="card-${i}">
         </div>`
-    }
+  }
 }
 
 function showPokemon(i, pkmData) {
-    let pkmCard = document.getElementById(`card-${i}`);
-    let secondType = "";
+  let pkmCard = document.getElementById(`card-${i}`);
+  let secondType = "";
 
+  if (pkmData.pkmtypes[1]) {
+    secondType = `<div id="pkm-type2-${i}" class="type">${pkmData.pkmtypes[1]}</div>`
+  };
 
-    if (pkmData.pkmtypes[1]) {
-        secondType = `<div id="pkm-type2-${i}" class="type">${pkmData.pkmtypes[1]}</div>`
-    };
-
-    pkmCard.innerHTML = `
+  pkmCard.innerHTML = `
     <div class="pkm-card-wrapper">
        <div class="pkm-id">#${i}</div>
    <div class="pkm-name">${pkmData.name.toUpperCase()}</div>
@@ -29,21 +28,18 @@ function showPokemon(i, pkmData) {
         </div>
     </div>`
 
-    pokemonTypeColor(i, pkmData);
+  pokemonTypeColor(i, pkmData);
 }
 
-
-
 function showPokemonOverlay(i, pkmData, pkmStatsData) {
+  let secondType = "";
+  let showPokemonDialog = document.getElementById('dialog');
 
-    let secondType = "";
-    let showPokemonDialog = document.getElementById('dialog');
+  if (pkmData.pkmtypes[1]) {
+    secondType = `<div id="pkm-type-${i}" class="type big-type ${typeColor[pkmData.pkmtypes[1]] || ''}">${pkmData.pkmtypes[1]}</div>`
+  };
 
-    if (pkmData.pkmtypes[1]) {
-        secondType = `<div id="pkm-type-${i}" class="type big-type ${typeColor[pkmData.pkmtypes[1]] || ''}">${pkmData.pkmtypes[1]}</div>`
-    };
-
-    showPokemonDialog.innerHTML = `
+  showPokemonDialog.innerHTML = `
         <div class="big-pkm-wrapper" id="dialog-${i}">
            <div class="card bigCard" id="card-${i}">
            <div class="head-pkm-card">
@@ -56,7 +52,11 @@ function showPokemonOverlay(i, pkmData, pkmStatsData) {
           </div>
           </div>
           
-<div class="progress-container">
+<div id ="progress" class="progress-container">
+  <div class="progress-row">
+    <span class="stat-name">${pkmStatsData[0].stat.name}:</span>
+    <div class="progress-bar" id="hpBar-${i}">0%</div>
+  </div>
   <div class="progress-row">
     <span class="stat-name">${pkmStatsData[1].stat.name}:</span>
     <div class="progress-bar" id="atkBar-${i}">0%</div>
@@ -78,15 +78,14 @@ function showPokemonOverlay(i, pkmData, pkmStatsData) {
     <div class="progress-bar" id="speedBar-${i}">0%</div>
   </div>
 </div>`
-
-    pokemonTypeColor(i, pkmData);
-    statsBar(i, pkmStatsData);
-            showArrows();
+  pokemonTypeColor(i, pkmData);
+  statsBar(i, pkmStatsData);
+  showArrows();
 }
 
 function showArrows() {
-    let arrows = document.getElementById('dialog');
-    arrows.innerHTML +=  `<div class="arrow-wrapper">
+  let arrows = document.getElementById('dialog');
+  arrows.innerHTML += `<div class="arrow-wrapper">
          <img onclick ='previousPokemon()' id="left-arrow" class="arrow" src="./img/arrow left.png">
         <img onclick='nextPokemon()' id="right-arrow" class="arrow" src="./img/arrow right.png">
            </div>

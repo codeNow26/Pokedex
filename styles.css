@@ -18,28 +18,33 @@ body {
 
 main {
     flex: 1;
+    max-width: 1920px;
+    margin: 0 auto;
 }
 
 header {
     background-color: rgb(120, 120, 228);
-    height: 100px;
+}
+
+.header-container {
+    max-width: 1920px;
+    margin: 0 auto;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 }
 
 .pkm-Logo {
 
-    padding-left: 150px;
     width: 250px;
 }
 
 
 .header-logo {
-    width: 80px;
-    padding-left: 30px;
+    width: 100px;
+    padding-left: 20px;
     transition: transform 0.6s ease-in-out;
-    transform-origin: 70px 40px;
+    transform-origin: 70px 50px;
 }
 
 .header-logo:hover {
@@ -153,7 +158,7 @@ header {
 }
 
 .search-pokemon-inputfield {
-    padding: 0px;
+    padding: 9px;
     border-radius: 8px;
     text-decoration: none;
     border: 1px solid #ffffff;
@@ -356,15 +361,14 @@ header {
 }
 
 .progress-container {
-    margin-top: 15px;
+    margin-top: 14px;
     display: flex;
     width: 100%;
-    height: 25px;
     max-width: 140px;
     border-radius: 10px;
-    padding: 10px;
+    padding-left: 10px;
     flex-direction: column;
-    gap: 6px;
+    gap: 2px;
 }
 
 .progress-bar {
@@ -439,6 +443,13 @@ header {
     animation: spin 1s linear infinite;
 }
 
+.no-results {
+    color: black;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -450,11 +461,16 @@ header {
 }
 
 footer {
+    background-color: rgb(120, 120, 228);
+}
+
+.footer-container {
+    height: 100px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 100px;
-    background-color: rgb(120, 120, 228);
+    max-width: 1920px;
+    margin: 0 auto;
 }
 
 
@@ -478,6 +494,10 @@ footer {
     cursor: auto
 }
 
+.test {
+    border: 1px solid;
+}
+
 @media (max-width: 1100px) {
     .pkm-Logo {
         width: 200px;
@@ -488,7 +508,6 @@ footer {
 @media (max-width: 900px) {
     .header-input {
         padding-right: 30px;
-        gap: 10px;
     }
 
     .bigCard {
@@ -523,7 +542,7 @@ footer {
         max-width: 140px;
         border-radius: 10px;
         padding: 10px;
-        gap: 8px;
+        gap: 2px;
     }
 
     .progress-bar {
@@ -560,6 +579,7 @@ footer {
     .pkm-Logo {
         width: 150px;
         padding-left: 100px;
+        display:none;
     }
 }
 
@@ -581,15 +601,13 @@ footer {
     .header-logo {
         width: 80px;
         padding-left: 20px;
+        transform-origin: 60px 40px;
 
     }
 
     .search-pokemon-inputfield {
-        padding: 4px 10px;
-        font-size: 12px;
-        height: 30px;
-        width: 150px;
-        box-sizing: border-box;
+        padding: 6px 10px;
+        margin-right: 60px;
     }
 
     .header-input {
@@ -597,9 +615,6 @@ footer {
         gap: 10px;
     }
 
-    .lupe {
-        width: 30px;
-    }
 }
 
 @media (max-width: 500px) {
@@ -635,7 +650,8 @@ footer {
         max-width: 140px;
         border-radius: 10px;
         padding: 4px;
-        gap: 2px;
+        gap: 0px;
+        margin-top: 6px;
     }
 
     .progress-bar {
@@ -670,5 +686,9 @@ footer {
         margin-top: 180px;
     }
 
-
+        .search-pokemon-inputfield {
+        margin-right: 40px;
+        width: 160px;
+        margin-left: 30px;
+    }
 }

@@ -1,15 +1,11 @@
 async function init() {
     createCard(1, 25);
     await getPokemon(1, currentPokemon);
-    console.log();
-
 }
 
-let currentNames = [];
 let allPokemon = {};
 let pkmStats = {};
 let currentPokemon = 25;
-
 const Base_URL = "https://pokeapi.co/api/v2/pokemon/";
 
 let typeColor = {
@@ -47,7 +43,6 @@ async function fetchPokemon(i) {
         pkmtypes,
         img
     };
-
 }
 
 async function fetchPokemonStats(i) {
@@ -97,9 +92,6 @@ function nextPokemon() {
     let card = document.querySelectorAll('.card');
     currentIndex++;
     if (currentIndex >= card.length) currentIndex = 1;
-    console.log(card.length);
-    console.log(currentIndex);
-
     let pkmStatsData = pkmStats[currentIndex]
     let pkmData = allPokemon[currentIndex];
     showPokemonOverlay(currentIndex, pkmData, pkmStatsData);
@@ -109,8 +101,6 @@ function previousPokemon() {
     let card = document.querySelectorAll('.card');
     currentIndex--;
     if (currentIndex === 0) currentIndex = card.length - 1;
-    console.log(currentIndex);
-
     let pkmStatsData = pkmStats[currentIndex]
     let pkmData = allPokemon[currentIndex];
     showPokemonOverlay(currentIndex, pkmData, pkmStatsData);
@@ -128,24 +118,23 @@ function closeDialog() {
 }
 
 function statsBar(i, pkmStatsData) {
+    let bar0 = document.getElementById(`hpBar-${i}`);
     let bar1 = document.getElementById(`atkBar-${i}`);
     let bar2 = document.getElementById(`dfnsBar-${i}`);
     let bar3 = document.getElementById(`spclAtkBar-${i}`);
     let bar4 = document.getElementById(`spclDfnsBar-${i}`);
     let bar5 = document.getElementById(`speedBar-${i}`);
 
+    bar0.style.width = pkmStatsData[1].base_stat + "%";
+    bar0.textContent = + pkmStatsData[1].base_stat;
     bar1.style.width = pkmStatsData[1].base_stat + "%";
     bar1.textContent = + pkmStatsData[1].base_stat;
-
     bar2.style.width = pkmStatsData[2].base_stat + "%";
     bar2.textContent = pkmStatsData[2].base_stat;
-
     bar3.style.width = pkmStatsData[3].base_stat + "%";
     bar3.textContent = pkmStatsData[3].base_stat;
-
     bar4.style.width = pkmStatsData[4].base_stat + "%";
     bar4.textContent = pkmStatsData[4].base_stat;
-
     bar5.style.width = pkmStatsData[5].base_stat + "%";
     bar5.textContent = pkmStatsData[5].base_stat;
 }
@@ -169,45 +158,47 @@ function hideLoading() {
     document.getElementById('loading-overlay').classList.add('hidden');
 }
 
-async function showWaterType(i, pkmData) {
-    test = document.getElementById("pep")
-
-    firstType = pkmData.pkmtypes[0];
-    let secondType = pkmData.pkmtypes[1];
-    console.log("Typ 1:", firstType);
-    console.log("Typ 2:", secondType);
-
-    if (firstType === "electric") {
-        test.innerHTML = `hat geklappt`
-    }
-}
-
 let lastInputLength = 0;
 
 function searchPokemon() {
     let input = document.getElementById("search-bar").value.trim().toLowerCase();
     let pokemon = document.getElementById('pokemon-container');
-    if (input.length < 3) {
+    let loadBtn = document.getElementById('load-new-pokemon');
+
+    if (nameInput(input.length, loadBtn, pokemon)) return;
+
+    lastInputLength = input.length;
+    pokemon.innerHTML = "";
+    filterPokemon(input, pokemon, loadBtn);
+}
+
+function nameInput(length, loadBtn, pokemon) {
+    if (length < 3) {
+        loadBtn.style.display = "block";
         if (lastInputLength >= 3) {
             pokemon.innerHTML = "";
             createCard(1, 25);
             getPokemon(1, currentPokemon);
         }
-        lastInputLength = input.length;
-        return;
+        lastInputLength = length;
+        return true;
     }
+    return false;
+}
 
-    lastInputLength = input.length;
-
-    pokemon.innerHTML = "";
-
+function filterPokemon(input, pokemon, loadBtn) {
+    let found = false;
     for (let i in allPokemon) {
         let pkm = allPokemon[i];
-        if (pkm && input.length > 2 && pkm.name.toLowerCase().includes(input)) {
+        if (pkm && pkm.name.toLowerCase().includes(input)) {
             pokemon.innerHTML += `
-        <div onclick="openDialogWindow(${i}, event)" class="card" id="card-${i}">
-        </div>`
+                <div onclick="openDialogWindow(${i}, event)" class="card" id="card-${i}"></div>`;
             showPokemon(i, pkm);
+            found = true;
         }
+    }
+    if (!found) {
+        pokemon.innerHTML = `<p class="no-results">No Pokémon found matching</p>`;
+        loadBtn.style.display = "none";
     }
 }
