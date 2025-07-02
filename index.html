@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -16,8 +16,8 @@
     <link rel="icon" type="image/png" href="./img/fav-icon.png">
 </head>
 
-<body onclick="closeDialog()" onload="init()">
-    <header>
+<body  onload="init()">
+    <header onclick= "closeDialog()">
         <div class="header-container">
             <img id="head" onclick="location.reload()" src="./img/Pokemon-Symbol-logo.png" class="header-logo">
             <img class="pkm-Logo" src="./img/Pokemon-Logo.png">
@@ -28,11 +28,13 @@
         </div>
     </header>
     <main>
+
         <div class="pkm" id="pokemon-container">
         </div>
-        <div onclick="bubblingPrevention(event)" id="dialog" class="dialog-window hidden"></div>
+        <div  id="dialog" class="dialog-window hidden"></div>
         <div class="load-pkm-container" id="load-new-pokemon-container">
             <button onclick="loadNewPokemon()" id="load-new-pokemon" class="load-pmn-btn">Lade mehr</button>
+            <button onclick="location.reload()" id="return-btn" class="returning-button">Return</button>
         </div>
         <div id="loading-overlay" class="hidden">
             <div class="loading"></div>
